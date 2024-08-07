@@ -1,4 +1,4 @@
-name: Push to Redocly Reunite (GH Workflow Example)
+name: 'Push to Redocly'
 
 on:
   push:
@@ -6,20 +6,21 @@ on:
       - '**'
 
 jobs:
-  reunite-push:
+  push:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       statuses: write
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
-      - name: Redocly Reunite push
+      - name: 'Push files and wait for deployment'
         uses: redocly/reunite-push-action@v1
         with:
           organization: 'imaginest'
           project: 'imaginest'
-          mountPath: 'products/api-hub/learningapi'
+          mountPath: '/products/api-hub/learningapi'
           files: 'get-started.md learning-api.yaml'
+          domain: 'https://app.cloud.redocly.com'
         env:
-          REDOCLY_AUTHORIZATION: ${{ secrets.REDOCLY_API_KEY }}
+          REDOCLY_AUTHORIZATION: ${{ secrets.REDOCLY_AUTHORIZATION }}
