@@ -29,7 +29,6 @@ paths:
       tags:
         - Other
       operationId: GetRoot
-      summary: Get API info
       responses:
         '200':
           description: OK.
