@@ -1,0 +1,25 @@
+name: Push to Redocly Reunite (GH Workflow Example)
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  reunite-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      statuses: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Redocly Reunite push
+        uses: redocly/reunite-push-action@v1
+        with:
+          organization: 'imaginest'
+          project: 'imaginest'
+          mountPath: 'products/api-hub/learningapi'
+          files: 'get-started.md learning-api.yaml'
+        env:
+          REDOCLY_AUTHORIZATION: ${{ secrets.REDOCLY_API_KEY }}
